@@ -66,17 +66,19 @@ class App extends StatelessWidget {
           onPressed: () {},
         ),
         OrangeButton(
-            onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.add,
-              color: ButtonColor.white,
-              size: 35,
-            ),
-            activeIcon: Icon(
-              CupertinoIcons.add,
-              color: ButtonColor.orange,
-              size: 35,
-            ))
+          isClick: false,
+          onPressed: () {},
+          icon: Icon(
+            CupertinoIcons.add,
+            color: ButtonColor.white,
+            size: 35,
+          ),
+          activeIcon: Icon(
+            CupertinoIcons.add,
+            color: ButtonColor.orange,
+            size: 35,
+          ),
+        ),
       ],
     );
   }
