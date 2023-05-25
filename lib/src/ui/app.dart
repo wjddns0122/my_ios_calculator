@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ios_calculator/src/components/black_button.dart';
+import 'package:my_ios_calculator/src/components/grey_button.dart';
 import 'package:my_ios_calculator/src/components/orange_buttion.dart';
 import 'package:my_ios_calculator/src/constants/button_color.dart';
 
@@ -53,28 +54,43 @@ class App extends StatelessWidget {
 
   Widget _firstRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        BlackButton(
+        GreyButton(
           onPressed: () {},
-          type: Type.FLAT,
-          child: '0',
-        ),
-        BlackButton(
           type: Type.ROUND,
-          child: '.',
+          child: const Text(
+            'AC',
+            style: TextStyle(
+                fontSize: 33, color: Colors.black, fontWeight: FontWeight.w600),
+          ),
+        ),
+        GreyButton(
+          type: Type.ROUND,
+          child: const Icon(
+            CupertinoIcons.plus_slash_minus,
+            color: Colors.black,
+            size: 35,
+          ),
           onPressed: () {},
         ),
+        GreyButton(
+            onPressed: () {},
+            type: Type.ROUND,
+            child: const Text(
+              '%',
+              style: TextStyle(fontSize: 30, color: Colors.black),
+            )),
         OrangeButton(
           isClick: false,
           onPressed: () {},
           icon: Icon(
-            CupertinoIcons.add,
+            CupertinoIcons.divide,
             color: ButtonColor.white,
             size: 35,
           ),
           activeIcon: Icon(
-            CupertinoIcons.add,
+            CupertinoIcons.divide,
             color: ButtonColor.orange,
             size: 35,
           ),
@@ -84,18 +100,175 @@ class App extends StatelessWidget {
   }
 
   Widget _secondRow() {
-    return Container();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        (const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '7',
+            style: TextStyle(fontSize: 35),
+          ),
+        )),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '8',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '9',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        OrangeButton(
+          isClick: false,
+          onPressed: () {},
+          icon: const Icon(
+            CupertinoIcons.multiply,
+            color: Colors.white,
+            size: 35,
+          ),
+          activeIcon: const Icon(
+            CupertinoIcons.multiply,
+            color: Colors.orange,
+            size: 35,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _thirdRow() {
-    return Container();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        (const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '4',
+            style: TextStyle(fontSize: 35),
+          ),
+        )),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '5',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '6',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        OrangeButton(
+          isClick: false,
+          onPressed: () {},
+          icon: const Icon(
+            CupertinoIcons.minus,
+            color: Colors.white,
+            size: 35,
+          ),
+          activeIcon: const Icon(
+            CupertinoIcons.minus,
+            color: Colors.orange,
+            size: 35,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _fourthRow() {
-    return Container();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        (const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '1',
+            style: TextStyle(fontSize: 35),
+          ),
+        )),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '2',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '3',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        OrangeButton(
+          isClick: false,
+          onPressed: () {},
+          icon: const Icon(
+            CupertinoIcons.plus,
+            color: Colors.white,
+            size: 35,
+          ),
+          activeIcon: const Icon(
+            CupertinoIcons.plus,
+            color: Colors.orange,
+            size: 35,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _fifthRow() {
-    return Container();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        (BlackButton(
+          type: Type.FLAT,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const [
+                Text(
+                  '0',
+                  style: TextStyle(fontSize: 35),
+                ),
+              ],
+            ),
+          ),
+        )),
+        const BlackButton(
+          type: Type.ROUND,
+          child: Text(
+            '.',
+            style: TextStyle(fontSize: 35),
+          ),
+        ),
+        OrangeButton(
+          isClick: false,
+          onPressed: () {},
+          icon: const Icon(
+            CupertinoIcons.equal,
+            color: Colors.white,
+            size: 35,
+          ),
+          activeIcon: const Icon(
+            CupertinoIcons.equal,
+            color: Colors.orange,
+            size: 35,
+          ),
+        ),
+      ],
+    );
   }
 }

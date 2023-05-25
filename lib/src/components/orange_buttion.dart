@@ -7,13 +7,13 @@ class OrangeButton extends StatefulWidget {
   final void Function()? onPressed;
   final Icon icon;
   final Icon activeIcon;
-  final bool isClick;
-  const OrangeButton({
+  bool? isClick;
+  OrangeButton({
     super.key,
     this.onPressed,
     required this.icon,
     required this.activeIcon,
-    required this.isClick,
+    this.isClick = false,
   });
 
   @override
@@ -23,7 +23,7 @@ class OrangeButton extends StatefulWidget {
 class _OrangeButtonState extends State<OrangeButton> {
   void _toggle() {
     setState(() {
-      widget.isClick != widget.isClick;
+      widget.isClick = !widget.isClick!;
     });
   }
 
@@ -39,8 +39,8 @@ class _OrangeButtonState extends State<OrangeButton> {
 
   Widget _foreward() {
     return AnimatedOpacity(
-      opacity: (!widget.isClick) ? 1.0 : 0.0,
-      duration: const Duration(seconds: 1),
+      opacity: (!widget.isClick!) ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 300),
       child: SizedBox(
         width: ButtonSize.short,
         height: ButtonSize.short,
