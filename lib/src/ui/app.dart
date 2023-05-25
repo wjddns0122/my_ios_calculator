@@ -79,7 +79,10 @@ class App extends StatelessWidget {
             type: Type.ROUND,
             child: const Text(
               '%',
-              style: TextStyle(fontSize: 30, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600),
             )),
         OrangeButton(
           isClick: false,
