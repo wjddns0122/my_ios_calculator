@@ -77,12 +77,10 @@ class App extends StatelessWidget {
         GreyButton(
             onPressed: () {},
             type: Type.ROUND,
-            child: const Text(
-              '%',
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600),
+            child: const Icon(
+              CupertinoIcons.percent,
+              color: Colors.black,
+              size: 30,
             )),
         OrangeButton(
           isClick: false,
