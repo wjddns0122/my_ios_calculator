@@ -1,49 +1,90 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_ios_calculator/src/constants/button_color.dart';
-import 'package:my_ios_calculator/src/constants/button_size.dart';
+import 'package:my_ios_calculator/src/components/basic_button.dart';
 
-enum Type { ROUND, FLAT }
+enum BlackButtonType {
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  ZER0,
+  DOT
+}
 
 class BlackButton extends StatelessWidget {
-  final void Function()? onPressed;
-  final Widget child;
-  final Type type;
-  const BlackButton(
-      {super.key, this.onPressed, required this.type, required this.child});
+  final BlackButtonType type;
+  final Function() onPressed;
+  const BlackButton({
+    super.key,
+    required this.type,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     switch (type) {
-      case Type.ROUND:
-        return _circle();
-      case Type.FLAT:
-        return _flat();
+      case BlackButtonType.ONE:
+        return _numberButton('1');
+
+      case BlackButtonType.TWO:
+        return _numberButton('2');
+
+      case BlackButtonType.THREE:
+        return _numberButton('3');
+
+      case BlackButtonType.FOUR:
+        return _numberButton('4');
+
+      case BlackButtonType.FIVE:
+        return _numberButton('5');
+
+      case BlackButtonType.SIX:
+        return _numberButton('6');
+
+      case BlackButtonType.SEVEN:
+        return _numberButton('7');
+
+      case BlackButtonType.EIGHT:
+        return _numberButton('8');
+
+      case BlackButtonType.NINE:
+        return _numberButton('9');
+
+      case BlackButtonType.ZER0:
+        return _zeroButton('0');
+
+      case BlackButtonType.DOT:
+        return _numberButton('.');
     }
   }
 
-  Widget _circle() {
+  Widget _numberButton(String number) {
+    return BasicButton(
+        color: ButtonColor.black,
+        onPressed: onPressed,
+        child: _numberText(number));
+  }
+
+  Widget _zeroButton(String number) {
     return SizedBox(
-      width: ButtonSize.short,
-      height: ButtonSize.short,
-      child: CupertinoButton(
-          borderRadius: BorderRadius.circular(100),
-          padding: const EdgeInsets.all(16.0),
+      height: 80,
+      width: 180,
+      child: BasicButton(
           color: ButtonColor.black,
-          onPressed: () {},
-          child: child),
+          onPressed: onPressed,
+          child: _numberText(number)),
     );
   }
 
-  Widget _flat() {
-    return SizedBox(
-      width: ButtonSize.long,
-      height: ButtonSize.short,
-      child: CupertinoButton(
-          borderRadius: BorderRadius.circular(100),
-          padding: const EdgeInsets.all(16.0),
-          color: ButtonColor.black,
-          onPressed: () {},
-          child: child),
+  Widget _numberText(String number) {
+    return Text(
+      number,
+      style: const TextStyle(fontSize: 35, color: CupertinoColors.white),
     );
   }
 }

@@ -3,76 +3,59 @@ import 'package:flutter/cupertino.dart';
 import '../constants/button_color.dart';
 import '../constants/button_size.dart';
 
-class OrangeButton extends StatefulWidget {
-  final void Function()? onPressed;
-  final Icon icon;
-  final Icon activeIcon;
-  bool? isClick;
-  OrangeButton({
+class OrangeButton extends StatelessWidget {
+  final void Function() onPressed;
+  final Icon iconFront;
+  final Icon iconBack;
+  final bool isClicked;
+  const OrangeButton({
     super.key,
-    this.onPressed,
-    required this.icon,
-    required this.activeIcon,
-    this.isClick = false,
+    required this.onPressed,
+    required this.iconFront,
+    required this.iconBack,
+    required this.isClicked,
   });
-
-  @override
-  State<OrangeButton> createState() => _OrangeButtonState();
-}
-
-class _OrangeButtonState extends State<OrangeButton> {
-  void _toggle() {
-    setState(() {
-      widget.isClick = !widget.isClick!;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _backward(),
-        _foreward(),
+        _backButton(),
+        _frontButton(),
       ],
     );
   }
 
-  Widget _foreward() {
+  Widget _frontButton() {
     return AnimatedOpacity(
-      opacity: (!widget.isClick!) ? 1.0 : 0.0,
+      opacity: (isClicked) ? 0.0 : 1.0,
       duration: const Duration(milliseconds: 300),
       child: SizedBox(
         width: ButtonSize.short,
         height: ButtonSize.short,
         child: CupertinoButton(
-          pressedOpacity: 1.0,
+          pressedOpacity: null,
           borderRadius: BorderRadius.circular(100),
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           color: ButtonColor.orange,
-          onPressed: () {
-            _toggle();
-            widget.onPressed;
-          },
-          child: widget.icon,
+          onPressed: onPressed,
+          child: iconFront,
         ),
       ),
     );
   }
 
-  Widget _backward() {
+  Widget _backButton() {
     return SizedBox(
       width: ButtonSize.short,
       height: ButtonSize.short,
       child: CupertinoButton(
         pressedOpacity: 1.0,
         borderRadius: BorderRadius.circular(100),
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         color: ButtonColor.white,
-        onPressed: () {
-          _toggle();
-          widget.onPressed;
-        },
-        child: widget.activeIcon,
+        onPressed: onPressed,
+        child: iconBack,
       ),
     );
   }

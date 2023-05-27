@@ -1,39 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_ios_calculator/src/components/black_button.dart';
+import 'package:my_ios_calculator/src/components/equal_button.dart';
 import 'package:my_ios_calculator/src/components/grey_button.dart';
 import 'package:my_ios_calculator/src/components/orange_buttion.dart';
-import 'package:my_ios_calculator/src/constants/button_color.dart';
+import 'package:my_ios_calculator/src/constants/icon_data.dart';
+import 'package:my_ios_calculator/src/constants/view_ratio.dart';
+import 'package:my_ios_calculator/src/controller/calculator_controller.dart';
 
-class App extends StatelessWidget {
+class App extends GetView<CalculatorController> {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          body: Column(
-            children: [
-              Expanded(flex: 3, child: _result()),
-              Expanded(flex: 7, child: _button()),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _result() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Align(
-        alignment: Alignment.bottomRight,
-        child: SelectableText(
-          '0',
-          style: TextStyle(
-              fontSize: 70, fontWeight: FontWeight.w200, color: Colors.white),
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Column(
+          children: [
+            Flexible(
+              flex: ViewRatio.ratio['top']!,
+              child: _result(),
+            ),
+            Flexible(
+              flex: ViewRatio.ratio['bottom']!,
+              child: _button(),
+            )
+          ],
         ),
       ),
     );
@@ -43,233 +36,177 @@ class App extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _firstRow(),
-        _secondRow(),
-        _thirdRow(),
-        _fourthRow(),
-        _fifthRow(),
+        _firstRow(), // 첫번째 줄
+        _secondRow(), // 두번째 줄
+        _thirdRow(), // 세번째 줄
+        _fourthRow(), // 내번째 줄
+        _fifthRow(), // 다섯번째 줄
       ],
     );
   }
 
+  Widget _result() {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Container(
+        alignment: Alignment.bottomRight,
+        child: Obx(
+          () => Text(
+            controller.result,
+            style: const TextStyle(
+                color: Colors.white, fontSize: 80, fontWeight: FontWeight.w200),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 버튼 첫번째 줄
   Widget _firstRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        GreyButton(
-          onPressed: () {},
-          type: Type.ROUND,
-          child: const Text(
-            'AC',
-            style: TextStyle(
-                fontSize: 33, color: Colors.black, fontWeight: FontWeight.w600),
-          ),
-        ),
-        GreyButton(
-          type: Type.ROUND,
-          child: const Icon(
-            CupertinoIcons.plus_slash_minus,
-            color: Colors.black,
-            size: 35,
-          ),
-          onPressed: () {},
-        ),
-        GreyButton(
-            onPressed: () {},
-            type: Type.ROUND,
-            child: const Icon(
-              CupertinoIcons.percent,
-              color: Colors.black,
-              size: 30,
-            )),
-        OrangeButton(
-          isClick: false,
-          onPressed: () {},
-          icon: Icon(
-            CupertinoIcons.divide,
-            color: ButtonColor.white,
-            size: 35,
-          ),
-          activeIcon: Icon(
-            CupertinoIcons.divide,
-            color: ButtonColor.orange,
-            size: 35,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _secondRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        (const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '7',
-            style: TextStyle(fontSize: 35),
-          ),
-        )),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '8',
-            style: TextStyle(fontSize: 35),
-          ),
-        ),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '9',
-            style: TextStyle(fontSize: 35),
-          ),
-        ),
-        OrangeButton(
-          isClick: false,
-          onPressed: () {},
-          icon: const Icon(
-            CupertinoIcons.multiply,
-            color: Colors.white,
-            size: 35,
-          ),
-          activeIcon: const Icon(
-            CupertinoIcons.multiply,
-            color: Colors.orange,
-            size: 35,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _thirdRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        (const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '4',
-            style: TextStyle(fontSize: 35),
-          ),
-        )),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '5',
-            style: TextStyle(fontSize: 35),
-          ),
-        ),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '6',
-            style: TextStyle(fontSize: 35),
-          ),
-        ),
-        OrangeButton(
-          isClick: false,
-          onPressed: () {},
-          icon: const Icon(
-            CupertinoIcons.minus,
-            color: Colors.white,
-            size: 35,
-          ),
-          activeIcon: const Icon(
-            CupertinoIcons.minus,
-            color: Colors.orange,
-            size: 35,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _fourthRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        (const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '1',
-            style: TextStyle(fontSize: 35),
-          ),
-        )),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '2',
-            style: TextStyle(fontSize: 35),
-          ),
-        ),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '3',
-            style: TextStyle(fontSize: 35),
-          ),
-        ),
-        OrangeButton(
-          isClick: false,
-          onPressed: () {},
-          icon: const Icon(
-            CupertinoIcons.plus,
-            color: Colors.white,
-            size: 35,
-          ),
-          activeIcon: const Icon(
-            CupertinoIcons.plus,
-            color: Colors.orange,
-            size: 35,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _fifthRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        (BlackButton(
-          type: Type.FLAT,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Text(
-                  '0',
-                  style: TextStyle(fontSize: 35),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GreyButton(
+              type: GreyButtonType.ALLCLEAR, onPressed: controller.allClear),
+          GreyButton(
+              type: GreyButtonType.PLUSANDMINUS, onPressed: controller.convert),
+          GreyButton(
+              type: GreyButtonType.PERCENT,
+              onPressed: controller.changeToPercent),
+          Obx(
+            () => OrangeButton(
+              iconFront: ButtonIconType.divide,
+              iconBack: ButtonIconType.divideReverse,
+              isClicked: controller.divide,
+              onPressed: controller.pushDivideButton,
             ),
           ),
-        )),
-        const BlackButton(
-          type: Type.ROUND,
-          child: Text(
-            '.',
-            style: TextStyle(fontSize: 35),
+        ],
+      ),
+    );
+  }
+
+  // 버튼 두번쨰 줄
+  Widget _secondRow() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlackButton(
+            type: BlackButtonType.SEVEN,
+            onPressed: () => controller.pushNumberButton('7'),
           ),
-        ),
-        OrangeButton(
-          isClick: false,
-          onPressed: () {},
-          icon: const Icon(
-            CupertinoIcons.equal,
-            color: Colors.white,
-            size: 35,
+          BlackButton(
+            type: BlackButtonType.EIGHT,
+            onPressed: () => controller.pushNumberButton('8'),
           ),
-          activeIcon: const Icon(
-            CupertinoIcons.equal,
-            color: Colors.orange,
-            size: 35,
+          BlackButton(
+            type: BlackButtonType.NINE,
+            onPressed: () => controller.pushNumberButton('9'),
           ),
-        ),
-      ],
+          Obx(
+            () => OrangeButton(
+              iconFront: ButtonIconType.multiply,
+              iconBack: ButtonIconType.multiplyReverse,
+              isClicked: controller.multiply,
+              onPressed: controller.pushMultiplyButton,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 버튼 새번쨰 줄
+  Widget _thirdRow() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlackButton(
+            type: BlackButtonType.FOUR,
+            onPressed: () => controller.pushNumberButton('4'),
+          ),
+          BlackButton(
+            type: BlackButtonType.FIVE,
+            onPressed: () => controller.pushNumberButton('5'),
+          ),
+          BlackButton(
+            type: BlackButtonType.SIX,
+            onPressed: () => controller.pushNumberButton('6'),
+          ),
+          Obx(
+            () => OrangeButton(
+              iconFront: ButtonIconType.minus,
+              iconBack: ButtonIconType.minusReverse,
+              isClicked: controller.minus,
+              onPressed: controller.pushMinusButton,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 버튼 네번째 줄
+  Widget _fourthRow() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlackButton(
+            type: BlackButtonType.ONE,
+            onPressed: () => controller.pushNumberButton('1'),
+          ),
+          BlackButton(
+            type: BlackButtonType.TWO,
+            onPressed: () => controller.pushNumberButton('2'),
+          ),
+          BlackButton(
+            type: BlackButtonType.THREE,
+            onPressed: () => controller.pushNumberButton('3'),
+          ),
+          Obx(
+            () => OrangeButton(
+              iconFront: ButtonIconType.plus,
+              iconBack: ButtonIconType.plusReverse,
+              isClicked: controller.plus,
+              onPressed: controller.pushPlusButton,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 버튼 다섯번쨰 줄
+  Widget _fifthRow() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlackButton(
+            type: BlackButtonType.ZER0,
+            onPressed: () => controller.pushNumberButton('0'),
+          ),
+          BlackButton(
+            type: BlackButtonType.DOT,
+            onPressed: () => controller.pushDotButton,
+          ),
+          EqualButton(onPressed: controller.calculate)
+        ],
+      ),
     );
   }
 }
