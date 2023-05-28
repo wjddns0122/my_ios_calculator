@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_ios_calculator/src/constants/button_size.dart';
 
+// ignore: constant_identifier_names
 enum ButtonShape { CIRCLE, FLAT }
 
 class BasicButton extends StatelessWidget {
