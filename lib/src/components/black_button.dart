@@ -3,16 +3,27 @@ import 'package:my_ios_calculator/src/constants/button_color.dart';
 import 'package:my_ios_calculator/src/components/basic_button.dart';
 
 enum BlackButtonType {
+  // ignore: constant_identifier_names
   ONE,
+  // ignore: constant_identifier_names
   TWO,
+  // ignore: constant_identifier_names
   THREE,
+  // ignore: constant_identifier_names
   FOUR,
+  // ignore: constant_identifier_names
   FIVE,
+  // ignore: constant_identifier_names
   SIX,
+  // ignore: constant_identifier_names
   SEVEN,
+  // ignore: constant_identifier_names
   EIGHT,
+  // ignore: constant_identifier_names
   NINE,
+  // ignore: constant_identifier_names
   ZER0,
+  // ignore: constant_identifier_names
   DOT
 }
 

@@ -6,6 +6,7 @@ import 'package:my_ios_calculator/src/constants/button_size.dart';
 import 'package:my_ios_calculator/src/constants/icon_data.dart';
 import 'package:my_ios_calculator/src/controller/calculator_controller.dart';
 
+// ignore: constant_identifier_names
 enum GreyButtonType { ALLCLEAR, PLUSANDMINUS, PERCENT }
 
 class GreyButton extends GetView<CalculatorController> {

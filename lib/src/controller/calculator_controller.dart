@@ -1,6 +1,8 @@
+// ignore: implementation_imports
 import 'package:flutter/src/gestures/drag_details.dart';
 import 'package:get/get.dart';
 
+// ignore: constant_identifier_names
 enum Calculate { PLUS, MINUS, MULTIPLY, DIVIDE, NONE }
 
 class CalculatorController extends GetxController {
@@ -145,7 +147,7 @@ class CalculatorController extends GetxController {
     }
   }
 
-  // _result값 숫자로 분리하여 num.parse함수에 사용 -> 곱하기 연산자 사용하고 문자열로 바꿔준다
+  // _result값 숫자로 분리하여 num.parse함수에 사용 -> 곱하기 연산자 사용하고 문자열로 바꿔준다 +/-
   void convert() {
     _result.value = (num.parse(_result.value) * -1).toString();
   }
