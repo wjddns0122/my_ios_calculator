@@ -101,6 +101,7 @@ class CalculatorController extends GetxController {
     pushCalculateButtonProgress(status);
   }
 
+  // . 버튼
   void pushDotButton() {
     if (_result.value.contains('.')) {
       return;
@@ -108,6 +109,7 @@ class CalculatorController extends GetxController {
     _result.value += '.';
   }
 
+  // 백분율 변경
   void changeToPercent() {
     _result.value = (num.parse(_result.value) / 100).toString();
   }
