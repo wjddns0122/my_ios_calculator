@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 enum Calculate { PLUS, MINUS, MULTIPLY, DIVIDE, NONE }
 
 class CalculatorController extends GetxController {
-  final RxString _result = '0'.obs;
+  final RxString _result = RxString('0');
   num num1 = 0;
   num num2 = 0;
   Calculate status = Calculate.NONE;
 
-  // obs 초기화
+  // get에서 초기화할 때 사용하는 obs
   bool pushCalculateButton = false;
   final RxBool _initStatus = true.obs;
   final RxBool _pushPlus = false.obs;
@@ -113,26 +113,35 @@ class CalculatorController extends GetxController {
   // calcultate 에서 예시로 10.5+10.5=21.0이 나오는데 double형 데이터를 입력 받았을때 toInt형으로 받아주면 21로 바뀐다~
   void calculate() {
     num2 = num.parse(_result.value);
+    num result = 0; // result 값을 초기화하는 변수
+
     switch (status) {
       case Calculate.PLUS:
-        _result.value = (num1 + num2).toInt().toString();
+        result = num1 + num2;
         break;
       case Calculate.MINUS:
-        _result.value = (num1 - num2).toInt().toString();
+        result = num1 - num2;
         break;
       case Calculate.MULTIPLY:
-        _result.value = (num1 * num2).toInt().toString();
+        result = num1 * num2;
         break;
       case Calculate.DIVIDE:
         if (num2 == 0) {
           _result.value = '오류';
           return;
         }
-        // ignore: division_optimization
-        _result.value = (num1 / num2).toInt().toString();
+        result = num1 / num2;
         break;
       case Calculate.NONE:
         break;
+    }
+
+    // 만약 result값이 나머지가 0일때 int형 변수로 바꿔주고 아닐 경우 double형 변수로 바꿔준다.
+    // _result 값은 private로 값이 변하기때문에 _result로 못한다
+    if (result % 1 == 0) {
+      _result.value = result.toInt().toString();
+    } else {
+      _result.value = result.toString();
     }
   }
 
