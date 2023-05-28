@@ -77,7 +77,7 @@ class BlackButton extends StatelessWidget {
       child: BasicButton(
           color: ButtonColor.black,
           onPressed: onPressed,
-          child: _numberText(number)),
+          child: _zeroNumberText(number)),
     );
   }
 
@@ -85,6 +85,21 @@ class BlackButton extends StatelessWidget {
     return Text(
       number,
       style: const TextStyle(fontSize: 35, color: CupertinoColors.white),
+    );
+  }
+
+  Widget _zeroNumberText(String number) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            number,
+            style: const TextStyle(fontSize: 35, color: CupertinoColors.white),
+          ),
+        ],
+      ),
     );
   }
 }

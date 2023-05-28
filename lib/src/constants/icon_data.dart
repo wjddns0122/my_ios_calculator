@@ -74,11 +74,17 @@ class ButtonIconType {
 
   static Text get allClear => const Text(
         'AC',
-        style: TextStyle(fontSize: 30, color: CupertinoColors.black),
+        style: TextStyle(
+            fontSize: 35,
+            color: CupertinoColors.black,
+            fontWeight: FontWeight.w500),
       );
 
   static Text get clear => const Text(
         'C',
-        style: TextStyle(fontSize: 30, color: CupertinoColors.black),
+        style: TextStyle(
+            fontSize: 35,
+            color: CupertinoColors.black,
+            fontWeight: FontWeight.w500),
       );
 }

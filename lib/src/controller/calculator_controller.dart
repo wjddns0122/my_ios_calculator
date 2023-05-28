@@ -9,6 +9,7 @@ class CalculatorController extends GetxController {
   num num2 = 0;
   Calculate status = Calculate.NONE;
 
+  // obs 초기화
   bool pushCalculateButton = false;
   final RxBool _initStatus = true.obs;
   final RxBool _pushPlus = false.obs;
@@ -109,35 +110,39 @@ class CalculatorController extends GetxController {
     _result.value = (num.parse(_result.value) / 100).toString();
   }
 
+  // calcultate 에서 예시로 10.5+10.5=21.0이 나오는데 double형 데이터를 입력 받았을때 toInt형으로 받아주면 21로 바뀐다~
   void calculate() {
     num2 = num.parse(_result.value);
     switch (status) {
       case Calculate.PLUS:
-        _result.value = (num1 + num2).toString();
+        _result.value = (num1 + num2).toInt().toString();
         break;
       case Calculate.MINUS:
-        _result.value = (num1 - num2).toString();
+        _result.value = (num1 - num2).toInt().toString();
         break;
       case Calculate.MULTIPLY:
-        _result.value = (num1 * num2).toString();
+        _result.value = (num1 * num2).toInt().toString();
         break;
       case Calculate.DIVIDE:
         if (num2 == 0) {
           _result.value = '오류';
           return;
         }
-        _result.value = (num1 / num2).toString();
+        // ignore: division_optimization
+        _result.value = (num1 / num2).toInt().toString();
         break;
       case Calculate.NONE:
         break;
     }
   }
 
+  // _result값 숫자로 분리하여 num.parse함수에 사용 -> 곱하기 연산자 사용하고 문자열로 바꿔준다
   void convert() {
     _result.value = (num.parse(_result.value) * -1).toString();
   }
 
   void remove(DragUpdateDetails details) {
+    // _result.value의 값을 초기화 하고 처음 값을 0으로 바꿔주는 함수
     if (_result.value.length > 1 && _result.value != '0') {
       _result.value = _result.value.substring(0, _result.value.length - 1);
       return;
