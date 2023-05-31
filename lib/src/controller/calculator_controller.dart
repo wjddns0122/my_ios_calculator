@@ -1,5 +1,4 @@
 // ignore: implementation_imports
-import 'package:flutter/src/gestures/drag_details.dart';
 import 'package:get/get.dart';
 
 // ignore: constant_identifier_names
@@ -26,14 +25,6 @@ class CalculatorController extends GetxController {
   bool get multiply => _pushMultiply.value;
   bool get divide => _pushDivide.value;
 
-  void allClear() {
-    initPushCalculateStatus();
-    initResultNumber();
-    num1 = 0;
-    num2 = 0;
-    status = Calculate.NONE;
-  }
-
   void initPushCalculateStatus() {
     _pushPlus.value = false;
     _pushMinus.value = false;
@@ -43,6 +34,14 @@ class CalculatorController extends GetxController {
 
   void initResultNumber() {
     _result.value = '0';
+  }
+
+  void allClear() {
+    initPushCalculateStatus();
+    initResultNumber();
+    num1 = 0;
+    num2 = 0;
+    status = Calculate.NONE;
   }
 
   void pushNumberButton(String value) {
@@ -55,7 +54,8 @@ class CalculatorController extends GetxController {
     if (_result.value[0] == '0' && _result.value.length == 1) {
       _result.value = '';
     }
-    _result.value += value;
+    _result.value +=
+        value; // _result 값이 문저열로 현재 비어있으면 0으로 값을 받아준다. 이러한 경우 _result 문자열은 빈 문자열로 남게 된다.
   }
 
   void pushCalculateButtonProgress(Calculate type) {
@@ -152,18 +152,5 @@ class CalculatorController extends GetxController {
   // _result값 숫자로 분리하여 num.parse함수에 사용 -> 곱하기 연산자 사용하고 문자열로 바꿔준다 +/-
   void convert() {
     _result.value = (num.parse(_result.value) * -1).toString();
-  }
-
-  void remove(DragUpdateDetails details) {
-    // _result.value의 값을 초기화 하고 처음 값을 0으로 바꿔주는 함수
-    if (_result.value.length > 1 && _result.value != '0') {
-      _result.value = _result.value.substring(0, _result.value.length - 1);
-      return;
-    }
-
-    if (_result.value.length == 1 && _result.value != '0') {
-      initResultNumber();
-      return;
-    }
   }
 }

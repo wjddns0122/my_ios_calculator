@@ -20,6 +20,7 @@ class OrangeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // 버튼을 누를때 색이 바뀌는 구조 -> 투명도로 버튼 2개를 만들어서 바꿈
         _backButton(),
         _frontButton(),
       ],
