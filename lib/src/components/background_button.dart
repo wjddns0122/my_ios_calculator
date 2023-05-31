@@ -6,7 +6,7 @@ class BackgroundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double buttonLength = Get.size.width / 4 - 15;
+    final double buttonLength = Get.size.width * 0.2;
     return Container(
       width: buttonLength,
       height: buttonLength,
