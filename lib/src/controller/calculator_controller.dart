@@ -2,12 +2,12 @@
 import 'package:get/get.dart';
 
 // ignore: constant_identifier_names
-enum Calculate { ADDITION, SUBSTRACTION, MULTIPLY, DIVIDE, NONE }
+enum Calculate { PLUS, MINUS, MULTIPLY, DIVIDE, NONE }
 
 class CalculatorController extends GetxController {
   final RxString _result = RxString('0');
-  num num1 = 0.0;
-  num num2 = 0.0;
+  double num1 = 0.0;
+  double num2 = 0.0;
   Calculate status = Calculate.NONE;
 
   // get에서 초기화할 때 사용하는 obs
@@ -39,8 +39,8 @@ class CalculatorController extends GetxController {
   void allClear() {
     initPushCalculateStatus();
     initResultNumber();
-    num1 = 0;
-    num2 = 0;
+    num1 = 0.0;
+    num2 = 0.0;
     status = Calculate.NONE;
   }
 
@@ -59,14 +59,14 @@ class CalculatorController extends GetxController {
   }
 
   void pushCalculateButtonProgress(Calculate type) {
-    num1 = num.parse(_result.value);
+    num1 = double.parse(_result.value);
     initPushCalculateStatus();
 
     switch (type) {
-      case Calculate.ADDITION:
+      case Calculate.PLUS:
         _pushPlus.value = true;
         break;
-      case Calculate.SUBSTRACTION:
+      case Calculate.MINUS:
         _pushMinus.value = true;
         break;
       case Calculate.MULTIPLY:
@@ -82,12 +82,12 @@ class CalculatorController extends GetxController {
   }
 
   void pushPlusButton() {
-    status = Calculate.ADDITION;
+    status = Calculate.PLUS;
     pushCalculateButtonProgress(status);
   }
 
   void pushMinusButton() {
-    status = Calculate.SUBSTRACTION;
+    status = Calculate.MINUS;
     pushCalculateButtonProgress(status);
   }
 
@@ -116,14 +116,14 @@ class CalculatorController extends GetxController {
 
   // calcultate 에서 예시로 10.5+10.5=21.0이 나오는데 double형 데이터를 입력 받았을때 toInt형으로 받아주면 21로 바뀐다~
   void calculate() {
-    num2 = num.parse(_result.value);
+    num2 = double.parse(_result.value);
     num result = 0; // result 값을 초기화하는 변수
 
     switch (status) {
-      case Calculate.ADDITION:
+      case Calculate.PLUS:
         result = num1 + num2;
         break;
-      case Calculate.SUBSTRACTION:
+      case Calculate.MINUS:
         result = num1 - num2;
         break;
       case Calculate.MULTIPLY:
