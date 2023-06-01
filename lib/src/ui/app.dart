@@ -5,7 +5,6 @@ import 'package:my_ios_calculator/src/components/equal_button.dart';
 import 'package:my_ios_calculator/src/components/grey_button.dart';
 import 'package:my_ios_calculator/src/components/orange_buttion.dart';
 import 'package:my_ios_calculator/src/constants/icon_data.dart';
-import 'package:my_ios_calculator/src/constants/view_ratio.dart';
 import 'package:my_ios_calculator/src/controller/calculator_controller.dart';
 
 class App extends GetView<CalculatorController> {
@@ -19,11 +18,11 @@ class App extends GetView<CalculatorController> {
         body: Column(
           children: [
             Flexible(
-              flex: ViewRatio.ratio['top']!,
+              flex: 1,
               child: _result(),
             ),
             Flexible(
-              flex: ViewRatio.ratio['bottom']!,
+              flex: 2,
               child: _button(),
             )
           ],

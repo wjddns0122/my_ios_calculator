@@ -2,12 +2,12 @@
 import 'package:get/get.dart';
 
 // ignore: constant_identifier_names
-enum Calculate { PLUS, MINUS, MULTIPLY, DIVIDE, NONE }
+enum Calculate { ADDITION, SUBSTRACTION, MULTIPLY, DIVIDE, NONE }
 
 class CalculatorController extends GetxController {
   final RxString _result = RxString('0');
-  num num1 = 0;
-  num num2 = 0;
+  num num1 = 0.0;
+  num num2 = 0.0;
   Calculate status = Calculate.NONE;
 
   // get에서 초기화할 때 사용하는 obs
@@ -63,10 +63,10 @@ class CalculatorController extends GetxController {
     initPushCalculateStatus();
 
     switch (type) {
-      case Calculate.PLUS:
+      case Calculate.ADDITION:
         _pushPlus.value = true;
         break;
-      case Calculate.MINUS:
+      case Calculate.SUBSTRACTION:
         _pushMinus.value = true;
         break;
       case Calculate.MULTIPLY:
@@ -82,12 +82,12 @@ class CalculatorController extends GetxController {
   }
 
   void pushPlusButton() {
-    status = Calculate.PLUS;
+    status = Calculate.ADDITION;
     pushCalculateButtonProgress(status);
   }
 
   void pushMinusButton() {
-    status = Calculate.MINUS;
+    status = Calculate.SUBSTRACTION;
     pushCalculateButtonProgress(status);
   }
 
@@ -120,10 +120,10 @@ class CalculatorController extends GetxController {
     num result = 0; // result 값을 초기화하는 변수
 
     switch (status) {
-      case Calculate.PLUS:
+      case Calculate.ADDITION:
         result = num1 + num2;
         break;
-      case Calculate.MINUS:
+      case Calculate.SUBSTRACTION:
         result = num1 - num2;
         break;
       case Calculate.MULTIPLY:
