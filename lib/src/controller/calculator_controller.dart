@@ -62,6 +62,14 @@ class CalculatorController extends GetxController {
     num1 = double.parse(_result.value);
     initPushCalculateStatus();
 
+    if (status == Calculate.PLUS && num2 != 0) {
+      _result.value;
+      if (type == Calculate.NONE) {
+        double result = double.parse(_result.value) + num2;
+        _result.value = result.toString();
+      }
+    }
+
     switch (type) {
       case Calculate.PLUS:
         _pushPlus.value = true;
