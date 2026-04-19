@@ -310,3 +310,5 @@ flutter run
 - 연속 연산 체인(예: `2 + 3 + 4 =`) 동작 고도화
 - 큰 숫자 표시 포맷(천 단위 구분)
 - 입력 길이 제한 및 폰트 자동 축소 전략
+
+[계산기 동작 영상 Youtube](https://www.youtube.com/watch?v=ho55ACppmTM)
